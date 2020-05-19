@@ -26,6 +26,9 @@ Spork.prefork do
     config.run_all_when_everything_filtered = true
     config.include Devise::Test::ControllerHelpers, type: :controller
 
+    config.include(Shoulda::Matchers::ActiveModel, type: :model)
+    config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation)
@@ -36,8 +39,15 @@ Spork.prefork do
     config.after(:all) do
       DatabaseCleaner.clean
     end
-
   end
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
+
 end
 
 Spork.each_run do

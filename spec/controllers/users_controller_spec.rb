@@ -10,7 +10,7 @@ describe UsersController do
     it 'should be success' do
       FactoryBot.create_list :user, rand(2..4)
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should see 2 records' do

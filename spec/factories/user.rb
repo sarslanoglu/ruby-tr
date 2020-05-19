@@ -6,7 +6,6 @@ FactoryBot.define do
     sequence :name do |n|
       "Abidik Gubigik #{n}"
     end
-    password 'some weird password'
-    bypass_humanizer true
+    password { 'some weird password' }
   end
 end
